@@ -5,13 +5,13 @@ const CardList= ({robots}) => {
 	return (
 		<div>
 	{
-		robots.map((user,i) => {
-		return ( 
-		<card 
+		robots.map((robot,i) => {
+			return ( 
+		<Card 
 		key={i}
-		id={robots[i].id}
-		 name={robots[i].name} 
-    	 email={robots[i].email}
+		id={robot.id}
+		 name={robot.name} 
+    	 email={robot.email}
     	 />
     	 );
 	})
@@ -19,5 +19,5 @@ const CardList= ({robots}) => {
 	</div>
 	);
 	}
-// Test comment
+
 export default CardList;
