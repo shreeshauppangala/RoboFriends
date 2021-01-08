@@ -7,7 +7,7 @@ import 'tachyons';
 
 
 ReactDOM.render(
-	<App />
-  ,document.getElementById('root')
+  <App />
+  , document.getElementById('root')
 );
 reportWebVitals();
