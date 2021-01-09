@@ -23,6 +23,12 @@ class App extends Component {
 		console.log(event);
 		this.setState({ searchfield: event.target.value })
 	}
+
+	AddRobo = () => {
+		console.log('click');
+		 
+	}
+
 	render() {
 		const { robots, searchfield } = this.state;
 		const filteredrobots = robots.filter(robot => {
@@ -34,10 +40,10 @@ class App extends Component {
 				<div className='tc'>
 					<h1 className='f1'>Robofriends</h1>
 					<Searchbox searchChange={this.onSearchChange} />
+					<AddRobo onButtonClick={this.AddRobo} />
 					<Scroll>
 						<CardList robots={filteredrobots} />
 					</Scroll>
-					<AddRobo />
 				</div>
 
 			);
