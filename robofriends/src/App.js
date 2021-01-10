@@ -47,7 +47,7 @@ class App extends Component {
 		})
 
 		return !robots.length ?
-			<h1>LOADING....</h1> :
+			<h1>Refresh</h1> :
 			(
 				<div className='tc'>
 					<h1 style={{ cursor: 'none' }} className='f1'>Robofriends</h1>
