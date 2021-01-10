@@ -4,11 +4,10 @@ import Searchbox from './searchbox';
 import AddRobo from "./AddRobo";
 import Scroll from './scroll';
 import "./App.css";
-import { robots } from './robots';
 
 
 class App extends Component {
-		constructor() {
+	constructor() {
 		super()
 		this.state = {
 			robots: [],
@@ -16,7 +15,7 @@ class App extends Component {
 		}
 	}
 	componentDidMount() {
-			 fetch('https://jsonplaceholder.typicode.com/users')
+		fetch('https://jsonplaceholder.typicode.com/users')
 			.then(response => response.json())
 			.then(users => { this.setState({ robots: users }) });
 	}
@@ -25,33 +24,37 @@ class App extends Component {
 	}
 
 	AddRobo = () => {
-		this.setState({robots})
-		// const {robots} = this.state;
-		const newrobo={
-			id : 121,
-			name : 'shreesha',
-			username : 'sharma' ,
-			email : 'shreeshauppangala@gmail.com'
+		const oldrobo = this.state.robots;
+		const newrobo = {
+			id: 121,
+			name: 'shreesha',
+			username: 'sharma',
+			email: 'shreeshauppangala@gmail.com'
 		}
-		robots.push(newrobo)
-
+		oldrobo.push(newrobo);
+		this.setState({ robots:oldrobo })
+	}
+	CloseRobo = (id) => {
+		const allrobo = this.state.robots;
+		const DeletedRobo = allrobo.filter(x => x.id !== id);
+		this.setState({ robots:DeletedRobo })
 	}
 
 	render() {
-		        const { robots, searchfield } = this.state;
-		        const filteredrobots = robots.filter(robot => {
-		        return robot.name.toLowerCase().includes(searchfield.toLowerCase());
-			 })
-			 
+		const { robots, searchfield } = this.state;
+		const filteredrobots = robots.filter(robot => {
+			return robot.name.toLowerCase().includes(searchfield.toLowerCase());
+		})
+
 		return !robots.length ?
 			<h1>LOADING....</h1> :
 			(
 				<div className='tc'>
-					<h1 style={{cursor:'none'}} className='f1'>Robofriends</h1>
+					<h1 style={{ cursor: 'none' }} className='f1'>Robofriends</h1>
 					<Searchbox searchChange={this.onSearchChange} />
 					<AddRobo onButtonClick={this.AddRobo} />
 					<Scroll>
-					<CardList robots={filteredrobots} />
+						<CardList onCloseClicklist={this.CloseRobo} robots={filteredrobots} />
 					</Scroll>
 				</div>
 
