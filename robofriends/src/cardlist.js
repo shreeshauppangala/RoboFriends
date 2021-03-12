@@ -1,18 +1,22 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import Card from './card'
 
 const CardList = ({ robots, onCloseClicklist, }) => {
+	const [cardListRobot,setCardListRobot]=useState(robots)
+	useEffect(() => {
+		setCardListRobot(robots)
+	},[robots])
 	return (
 		<div>
 			{
-				robots.map((user, i) => {
+				cardListRobot.map((user, i) => {
 					return (
 						<Card
 							onCloseClick={onCloseClicklist}
 							key={i}
-							id={robots[i].id}
-							name={robots[i].name}
-							email={robots[i].email}
+							id={cardListRobot[i].id}
+							name={cardListRobot[i].name}
+							email={cardListRobot[i].email}
 						/>
 					);
 				})

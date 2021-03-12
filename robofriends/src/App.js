@@ -1,30 +1,25 @@
-import React, { Component } from 'react';
+import React, {useState,useEffect} from 'react';
 import CardList from './cardlist';
 import Searchbox from './searchbox';
-import AddRobo from "./AddRobo";
+import AddRoboButton from "./AddRoboButton";
 import Scroll from './scroll';
 import "./App.css";
 
+const App = () => {
+	const [robots,setRobots] = useState([])
+	const [searchfield,setSearchfield] = useState('')
 
-class App extends Component {
-	constructor() {
-		super()
-		this.state = {
-			robots: [],
-			searchfield: ''
-		}
-	}
-	componentDidMount() {
+	useEffect( () => {
 		fetch('https://jsonplaceholder.typicode.com/users')
 			.then(response => response.json())
-			.then(users => { this.setState({ robots: users }) });
-	}
-	onSearchChange = (event) => {
-		this.setState({ searchfield: event.target.value })
+			.then(users => {setRobots(users) });
+	 },[])
+	const onSearchChange = ( event ) => {
+		setSearchfield(event.target.value )
 	}
 
-	AddRobo = () => {
-		const oldrobo = this.state.robots;
+     const addRobo = () => {
+		const oldrobo = [...robots];
 		const newrobo = {
 			id: 121,
 			name: 'shreesha',
@@ -32,34 +27,29 @@ class App extends Component {
 			email: 'shreeshauppangala@gmail.com'
 		}
 		oldrobo.push(newrobo);
-		this.setState({ robots:oldrobo })
+		setRobots(oldrobo)
 	}
-	CloseRobo = (id) => {
-		const allrobo = this.state.robots;
-		const DeletedRobo = allrobo.filter(x => x.id !== id);
-		this.setState({ robots:DeletedRobo })
+	const closeRobo = (id) => {
+		const allrobo = robots;
+		const deletedRobo = allrobo.filter(x => x.id !== id);
+		setRobots(deletedRobo)
 	}
-
-	render() {
-		const { robots, searchfield } = this.state;
 		const filteredrobots = robots.filter(robot => {
 			return robot.name.toLowerCase().includes(searchfield.toLowerCase());
 		})
-
 		return !robots.length ?
-			<h1>Refresh</h1> :
+			<h1>Please Refresh</h1> :
 			(
 				<div className='tc'>
 					<h1 style={{ cursor: 'none' }} className='f1'>Robofriends</h1>
-					<Searchbox searchChange={this.onSearchChange} />
-					<AddRobo onButtonClick={this.AddRobo} />
+					<Searchbox searchChange={onSearchChange} />
+					<AddRoboButton onButtonClick={addRobo} />
 					<Scroll>
-						<CardList onCloseClicklist={this.CloseRobo} robots={filteredrobots} />
+						<CardList onCloseClicklist={closeRobo} robots={filteredrobots} />
 					</Scroll>
 				</div>
 
 			);
-	}
 }
 
 export default App;
