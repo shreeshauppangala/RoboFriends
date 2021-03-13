@@ -26,7 +26,13 @@ const App = () => {
 			username: 'sharma',
 			email: 'shreeshauppangala@gmail.com'
 		}
-		oldrobo.push(newrobo);
+		const home = {
+			id: 122,
+			name: 'uppangala',
+			username: 'sharma',
+			email: 'uppangala@gmail.com'
+		}
+		oldrobo.push(newrobo,home);
 		setRobots(oldrobo)
 	}
 	const closeRobo = (id) => {
@@ -38,7 +44,7 @@ const App = () => {
 			return robot.name.toLowerCase().includes(searchfield.toLowerCase());
 		})
 		return !robots.length ?
-			<h1>Please Refresh</h1> :
+			<h1>Please Refresh This Page</h1> :
 			(
 				<div className='tc'>
 					<h1 style={{ cursor: 'none' }} className='f1'>Robofriends</h1>
