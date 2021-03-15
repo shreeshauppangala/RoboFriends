@@ -3,9 +3,7 @@ import Card from './card'
 
 const CardList = ({ robots, onCloseClicklist, }) => {
 	const [cardListRobot,setCardListRobot]=useState(robots)
-	useEffect(() => {
-		setCardListRobot(robots)
-	},[robots])
+	useEffect(() => { setCardListRobot(robots) },[robots])
 	return (
 		<div>
 			{
