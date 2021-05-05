@@ -1,14 +1,13 @@
-import React, {useState,useEffect} from 'react';
+import React, { useState,useEffect } from 'react';
 import { useSelector,useDispatch } from "react-redux";
+import { setSearchField } from "../Redux/action";
+import { getSearchFieldSelector,getRobotsSelector } from '../Redux/selector';
+import { REQUEST_ROBOTS_FAIL,REQUEST_ROBOTS_SUCCESS } from "../Redux/const";
 import CardList from './cardlist';
 import Searchbox from './searchbox';
 import AddRoboButton from "./AddRoboButton";
 import Scroll from './scroll';
 import "./App.css";
-import { setSearchField } from "../Redux/action";
-import { getSearchFieldSelector,getRobotsSelector } from '../Redux/selector';
-import {REQUEST_ROBOTS_FAIL,REQUEST_ROBOTS_SUCCESS } from "../Redux/const";
-
 
 // const mapStateToProps = (state) => {
 // 	return {
@@ -27,9 +26,12 @@ import {REQUEST_ROBOTS_FAIL,REQUEST_ROBOTS_SUCCESS } from "../Redux/const";
 // }
 const App = () => {
 	const dispatch = useDispatch()
+
 	const searchField = useSelector(getSearchFieldSelector)
   	const robots = useSelector(getRobotsSelector)
+
 	const [localRobots, setLocalRobots] = useState(robots)
+
 	useEffect( () => {
 		    fetch('https://jsonplaceholder.typicode.com/users')
 			.then(response => response.json())
