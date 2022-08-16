@@ -53,10 +53,10 @@ const App = () => {
 		return robot.name.toLowerCase().includes(searchField?.toLowerCase());
 	})
 	return !localRobots.length ?
-		<h1>Please Refresh This Page</h1> :
+		<p className='header tc'>Please Refresh This Page</p> :
 		(
 			<div className='tc'>
-				<h1 style={{ cursor: 'none' }} className='f1'>Robot Friends</h1>
+				<span className='header'>Robot Friends</span>
 				<SearchBox searchChange={(event) => dispatch(setSearchField(event.target.value))} />
 				<AddRobotButton onButtonClick={addRobot} />
 				{
