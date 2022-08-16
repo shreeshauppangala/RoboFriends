@@ -10,7 +10,7 @@
     "firebase": "^8.2.6",
     "hosted-git-info": "^4.0.2",
     "lodash": "^4.17.21",
-    "moment": "^2.29.2",
+    "moment": "^2.29.4",
     "postcss": "^8.2.15",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
