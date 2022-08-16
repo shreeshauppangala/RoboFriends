@@ -8,7 +8,7 @@ export const getRobotsSelector = (state) => {
     return state.requestRobots?.robots || []
 }
 
-export const getisPendingSelector = (state) => {
+export const getIsPendingSelector = (state) => {
 
     return state.requestRobots.isPending
 }
