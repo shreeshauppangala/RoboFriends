@@ -17,10 +17,16 @@ const App = () => {
 	const [localRobots, setLocalRobots] = useState(robots)
 
 	useEffect(() => {
-		fetch('https://jsonplaceholder.typicode.com/users')
-			.then(response => response.json())
-			.then(data => dispatch({ type: REQUEST_ROBOTS_SUCCESS, payload: data }))
-			.catch(error => dispatch({ type: REQUEST_ROBOTS_FAIL, payload: error }))
+		const getUsers = async () => {
+			try {
+				await fetch('https://jsonplaceholder.typicode.com/users')
+					.then(response => response.json())
+					.then(data => dispatch({ type: REQUEST_ROBOTS_SUCCESS, payload: data }))
+			} catch (error) {
+				dispatch({ type: REQUEST_ROBOTS_FAIL, payload: error })
+			}
+		}
+		getUsers()
 	}, [dispatch])
 
 	useEffect(() => {
@@ -57,11 +63,11 @@ const App = () => {
 		(
 			<div className='tc'>
 				<span className='header'>Robot Friends</span>
-				<SearchBox searchChange={(event) => dispatch(setSearchField(event.target.value))} />
-				<AddRobotButton onButtonClick={addRobot} />
+				<SearchBox searchChange={ (event) => dispatch(setSearchField(event.target.value)) } />
+				<AddRobotButton onButtonClick={ addRobot } />
 				{
 					(filteredRobots && filteredRobots.length > 0)
-						? <CardList onCloseClickList={closeRobot} robots={filteredRobots} />
+						? <CardList onCloseClickList={ closeRobot } robots={ filteredRobots } />
 						: null
 				}
 			</div>
